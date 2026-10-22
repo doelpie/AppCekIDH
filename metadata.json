@@ -1,0 +1,6 @@
+{
+  "name": "IDH Order Lookup & WhatsApp Formatter",
+  "description": "Aplikasi pengolah data transaksi order-IDH dengan lookup otomatis Master PCP (Prod Ok & Admint), filter status blank, dan generator pesan WhatsApp siap kirim.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

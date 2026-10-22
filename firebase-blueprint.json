@@ -1,0 +1,67 @@
+{
+  "entities": {
+    "MasterPcp": {
+      "title": "MasterPcp",
+      "description": "Rujukan Master Principal, Prod Ok, Divisi, Admin, dan ND",
+      "type": "object",
+      "properties": {
+        "principal": { "type": "string", "description": "Nama Principal" },
+        "prdOk": { "type": "string", "description": "Kode Prod Ok" },
+        "divisi": { "type": "string", "description": "Divisi Principal" },
+        "admin": { "type": "string", "description": "Admin yang menangani" },
+        "nd": { "type": "string", "description": "Kode ND" },
+        "updatedAt": { "type": "string", "description": "Waktu terakhir pembaruan" }
+      },
+      "required": ["principal", "prdOk", "admin"]
+    },
+    "MasterDepo": {
+      "title": "MasterDepo",
+      "description": "Rujukan Titik Kirim DEPO, Kode Area, dan ADMINT",
+      "type": "object",
+      "properties": {
+        "titikKirim": { "type": "string", "description": "Nama Titik Kirim Depo" },
+        "area": { "type": "string", "description": "Singkatan Area Depo" },
+        "admint": { "type": "string", "description": "Nama Admin Depo" },
+        "updatedAt": { "type": "string", "description": "Waktu update" }
+      },
+      "required": ["titikKirim", "area", "admint"]
+    },
+    "FollowUpOrder": {
+      "title": "FollowUpOrder",
+      "description": "Daftar catatan tindak lanjut order IDH dengan status produk blank atau perlu konfirmasi",
+      "type": "object",
+      "properties": {
+        "noPoIdh": { "type": "string", "description": "Nomor IDH #PO" },
+        "tglPoIdh": { "type": "string", "description": "Tanggal PO IDH tanpa jam" },
+        "prodOk": { "type": "string", "description": "Prod Ok" },
+        "principal": { "type": "string", "description": "Nama Principal" },
+        "idPelanggan": { "type": "string", "description": "ID Pelanggan / Kode Toko" },
+        "namaPelanggan": { "type": "string", "description": "Nama Pelanggan" },
+        "hpPelanggan": { "type": "string", "description": "Nomor HP Pelanggan" },
+        "alamatPelanggan": { "type": "string", "description": "Alamat Pengiriman" },
+        "titikKirim": { "type": "string", "description": "Titik Kirim / Depo" },
+        "admint": { "type": "string", "description": "Admin yang bertugas" },
+        "statusProduk": { "type": "string", "description": "Status produk asli" },
+        "followUpStatus": { "type": "string", "description": "Status tindak lanjut (pending, wa_sent, confirmed, canceled)" },
+        "catatan": { "type": "string", "description": "Catatan tindak lanjut atau chat WA" },
+        "createdAt": { "type": "string", "description": "Waktu disimpan" },
+        "updatedAt": { "type": "string", "description": "Waktu diperbarui" }
+      },
+      "required": ["noPoIdh", "principal", "namaPelanggan"]
+    }
+  },
+  "firestore": {
+    "/master_pcp/{id}": {
+      "schema": "MasterPcp",
+      "description": "Koleksi data master PCP yang tersinkronisasi di Cloud Firestore"
+    },
+    "/master_depo/{id}": {
+      "schema": "MasterDepo",
+      "description": "Koleksi data master DEPO titik kirim yang tersinkronisasi di Cloud Firestore"
+    },
+    "/follow_up_orders/{id}": {
+      "schema": "FollowUpOrder",
+      "description": "Catatan tindak lanjut dan konfirmasi WhatsApp order IDH"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+
+# AI Studio temporary logs & browser snapshots
+.playwright-cli/
+.aistudio/artifacts/
+
+# Ignore huge raw CSV files to prevent GitHub API payload limits (Max ~25-50MB)
+public/assets/aistudio/*.csv
+*.csv
+!public/assets/sample-order-idh.csv
