@@ -20,5 +20,15 @@ service cloud.firestore {
     match /follow_up_orders/{docId} {
       allow read, write: if true;
     }
+
+    // Full CSV Order IDH rows synchronized in chunks
+    match /uploaded_orders_batches/{docId} {
+      allow read, write: if true;
+    }
+
+    // Full CSV Retur & Tukar IDH rows synchronized in chunks
+    match /uploaded_retur_batches/{docId} {
+      allow read, write: if true;
+    }
   }
 }

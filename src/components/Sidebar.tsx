@@ -1,29 +1,25 @@
 import React from 'react';
 import {
-  LayoutDashboard,
   ShoppingCart,
   MessageSquare,
   Database,
   UploadCloud,
   Settings,
-  ChevronDown,
   MapPin,
   Flame,
-  CheckCircle2,
-  HelpCircle,
-  FileText,
-  Building2
+  RotateCcw
 } from 'lucide-react';
 import { AdminResolutionMode } from '../types';
 
 interface SidebarProps {
   isOpen: boolean;
   onCloseMobile: () => void;
-  activeTab: 'transaksi' | 'followup' | 'master';
-  onChangeTab: (tab: 'transaksi' | 'followup' | 'master') => void;
+  activeTab: 'transaksi' | 'retur' | 'followup' | 'master';
+  onChangeTab: (tab: 'transaksi' | 'retur' | 'followup' | 'master') => void;
   followUpCount: number;
   totalOrdersCount: number;
   blankCount: number;
+  returCount: number;
   adminMode: AdminResolutionMode;
   onChangeAdminMode: (mode: AdminResolutionMode) => void;
   onOpenUpload: () => void;
@@ -37,7 +33,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onChangeTab,
   followUpCount,
   totalOrdersCount,
-  blankCount,
+  returCount,
   adminMode,
   onChangeAdminMode,
   onOpenUpload,
@@ -108,7 +104,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Navigation Menus */}
         <nav className="flex-1 overflow-y-auto p-3 space-y-1 text-xs font-semibold">
           {/* Main Transaksi Group */}
-          <div className="pt-1 pb-1">
+          <div className="pt-1 pb-1 space-y-1">
             <p className="px-3 text-[10px] uppercase font-bold tracking-wider text-slate-400 mb-1">
               Menu Utama IDH
             </p>
@@ -132,6 +128,29 @@ export const Sidebar: React.FC<SidebarProps> = ({
               {totalOrdersCount > 0 && (
                 <span className="px-2 py-0.5 rounded-full text-[10px] bg-slate-200 text-slate-700 font-bold">
                   {totalOrdersCount.toLocaleString('id-ID')}
+                </span>
+              )}
+            </button>
+
+            {/* Retur & Tukar IDH */}
+            <button
+              onClick={() => {
+                onChangeTab('retur');
+                onCloseMobile();
+              }}
+              className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-all ${
+                activeTab === 'retur'
+                  ? 'bg-[#005b64]/10 text-[#005b64] font-bold border-l-4 border-[#005b64]'
+                  : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <RotateCcw className="w-4 h-4 text-[#f5a623]" />
+                <span>Retur & Tukar IDH</span>
+              </div>
+              {returCount > 0 && (
+                <span className="px-2 py-0.5 rounded-full text-[10px] bg-amber-100 text-amber-900 border border-amber-300 font-bold">
+                  {returCount.toLocaleString('id-ID')}
                 </span>
               )}
             </button>
@@ -195,7 +214,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all"
             >
               <UploadCloud className="w-4 h-4 text-emerald-600" />
-              <span>Import CSV Baru</span>
+              <span>Upload File CSV Baru</span>
             </button>
 
             {/* Mode Admint Dropdown */}
@@ -221,7 +240,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         {/* Sidebar Footer */}
         <div className="p-3 border-t border-slate-100 text-[11px] text-slate-500 bg-slate-50/50">
-          <p className="font-semibold text-slate-700">IDH Delta Bali v2.5</p>
+          <p className="font-semibold text-slate-700">IDH Delta Bali v3.0</p>
           <p className="text-[10px] text-slate-400">Terintegrasi Cloud Firestore</p>
         </div>
       </aside>

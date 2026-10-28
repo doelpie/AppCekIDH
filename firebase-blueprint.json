@@ -28,26 +28,47 @@
     },
     "FollowUpOrder": {
       "title": "FollowUpOrder",
-      "description": "Daftar catatan tindak lanjut order IDH dengan status produk blank atau perlu konfirmasi",
+      "description": "Daftar catatan tindak lanjut order IDH dengan status produk OPEN/blank",
       "type": "object",
       "properties": {
         "noPoIdh": { "type": "string", "description": "Nomor IDH #PO" },
         "tglPoIdh": { "type": "string", "description": "Tanggal PO IDH tanpa jam" },
         "prodOk": { "type": "string", "description": "Prod Ok" },
         "principal": { "type": "string", "description": "Nama Principal" },
-        "idPelanggan": { "type": "string", "description": "ID Pelanggan / Kode Toko" },
-        "namaPelanggan": { "type": "string", "description": "Nama Pelanggan" },
-        "hpPelanggan": { "type": "string", "description": "Nomor HP Pelanggan" },
-        "alamatPelanggan": { "type": "string", "description": "Alamat Pengiriman" },
+        "namaPelanggan": { "type": "string", "description": "Nama Outlet Pelanggan" },
         "titikKirim": { "type": "string", "description": "Titik Kirim / Depo" },
         "admint": { "type": "string", "description": "Admin yang bertugas" },
-        "statusProduk": { "type": "string", "description": "Status produk asli" },
+        "statusProduk": { "type": "string", "description": "Status produk (OPEN / Confirmed / Canceled)" },
         "followUpStatus": { "type": "string", "description": "Status tindak lanjut (pending, wa_sent, confirmed, canceled)" },
         "catatan": { "type": "string", "description": "Catatan tindak lanjut atau chat WA" },
-        "createdAt": { "type": "string", "description": "Waktu disimpan" },
         "updatedAt": { "type": "string", "description": "Waktu diperbarui" }
       },
       "required": ["noPoIdh", "principal", "namaPelanggan"]
+    },
+    "UploadedOrderBatch": {
+      "title": "UploadedOrderBatch",
+      "description": "Batch data seluruh baris CSV Order IDH yang tersinkronisasi penuh dengan Firebase tanpa nama produk",
+      "type": "object",
+      "properties": {
+        "batchIndex": { "type": "number", "description": "Urutan chunk batch" },
+        "fileName": { "type": "string", "description": "Nama file CSV yang diupload" },
+        "totalRows": { "type": "number", "description": "Total seluruh baris CSV" },
+        "updatedAt": { "type": "string", "description": "Waktu upload" },
+        "rowsJson": { "type": "string", "description": "Data baris order terkompresi/serialisasi" }
+      },
+      "required": ["batchIndex", "fileName", "updatedAt"]
+    },
+    "UploadedReturBatch": {
+      "title": "UploadedReturBatch",
+      "description": "Batch data Retur & Tukar Barang Pelanggan IDH (Belum dikonfirmasi)",
+      "type": "object",
+      "properties": {
+        "batchIndex": { "type": "number", "description": "Urutan chunk batch" },
+        "fileName": { "type": "string", "description": "Nama file CSV Retur" },
+        "updatedAt": { "type": "string", "description": "Waktu upload" },
+        "rowsJson": { "type": "string", "description": "Data pengajuan retur & tukar" }
+      },
+      "required": ["batchIndex", "fileName", "updatedAt"]
     }
   },
   "firestore": {
@@ -62,6 +83,14 @@
     "/follow_up_orders/{id}": {
       "schema": "FollowUpOrder",
       "description": "Catatan tindak lanjut dan konfirmasi WhatsApp order IDH"
+    },
+    "/uploaded_orders_batches/{id}": {
+      "schema": "UploadedOrderBatch",
+      "description": "Seluruh baris data CSV Order IDH yang aktif di aplikasi"
+    },
+    "/uploaded_retur_batches/{id}": {
+      "schema": "UploadedReturBatch",
+      "description": "Data pengajuan Retur & Tukar Barang Pelanggan IDH"
     }
   }
 }

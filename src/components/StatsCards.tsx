@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertCircle, CheckCircle2, XCircle, FileSpreadsheet, Store, Users, ShoppingCart } from 'lucide-react';
+import { AlertCircle, CheckCircle2, XCircle, FileSpreadsheet, Store } from 'lucide-react';
 import { ProcessedOrderRow } from '../types';
 
 interface StatsCardsProps {
@@ -21,7 +21,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-4">
-      {/* 1. Status Blank (Action Card - Amber) */}
+      {/* 1. Status OPEN / Blank (Action Card - Amber) */}
       <button
         type="button"
         onClick={() => onSelectFilter('blank_only')}
@@ -33,7 +33,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({
       >
         <div className="flex items-center justify-between">
           <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 flex items-center gap-1">
-            <AlertCircle className="w-3.5 h-3.5 text-amber-600" /> Status Blank
+            <AlertCircle className="w-3.5 h-3.5 text-amber-600" /> Status OPEN
           </span>
           <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
         </div>
@@ -41,9 +41,9 @@ export const StatsCards: React.FC<StatsCardsProps> = ({
           <span className="text-xl sm:text-2xl font-extrabold text-slate-900">
             {blankRows.toLocaleString('id-ID')}
           </span>
-          <span className="text-[10px] text-amber-600 font-bold">baris</span>
+          <span className="text-[10px] text-amber-600 font-bold">ORDERAN PO IDH</span>
         </div>
-        <p className="text-[10px] text-slate-500 mt-0.5 truncate">Perlu konfirmasi WA</p>
+        <p className="text-[10px] text-slate-500 mt-0.5 truncate">Perlu tindakan share WA</p>
       </button>
 
       {/* 2. Total Semua Baris (Teal) */}
@@ -58,7 +58,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({
       >
         <div className="flex items-center justify-between">
           <span className="text-[10px] font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1">
-            <FileSpreadsheet className="w-3.5 h-3.5 text-[#005b64]" /> Total Transaksi
+            <FileSpreadsheet className="w-3.5 h-3.5 text-[#005b64]" /> Total Orderan CSV
           </span>
         </div>
         <div className="mt-1 flex items-baseline gap-1">
@@ -66,7 +66,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({
             {totalRows.toLocaleString('id-ID')}
           </span>
         </div>
-        <p className="text-[10px] text-slate-500 mt-0.5 truncate">Semua data item</p>
+        <p className="text-[10px] text-slate-500 mt-0.5 truncate">Tersinkron di Firebase</p>
       </button>
 
       {/* 3. Confirmed (Blue) */}
@@ -119,7 +119,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({
       <div className="p-3 rounded-xl border bg-white border-slate-200">
         <div className="flex items-center justify-between">
           <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1">
-            <Store className="w-3.5 h-3.5 text-teal-600" /> Total No. PO
+            <Store className="w-3.5 h-3.5 text-teal-600" /> Nomor PO Unik
           </span>
         </div>
         <div className="mt-1 flex items-baseline gap-1">
@@ -127,7 +127,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({
             {uniquePos.toLocaleString('id-ID')}
           </span>
         </div>
-        <p className="text-[10px] text-slate-500 mt-0.5 truncate">Nomor PO unik</p>
+        <p className="text-[10px] text-slate-500 mt-0.5 truncate">Total PO berbeda</p>
       </div>
     </div>
   );
